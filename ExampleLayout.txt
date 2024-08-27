@@ -1,0 +1,28 @@
+/my-app
+│
+├── /backend       # Contains the Express backend
+│   ├── /routes    # Define API routes here
+│   ├── /models    # Database models (e.g., Mongoose models for MongoDB)
+│   ├── /controllers # Logic for handling requests
+│   ├── /middlewares # Custom middleware
+│   ├── app.js     # Main application setup file
+│   └── server.js  # Server entry point
+│
+├── /frontend      # Contains the React frontend
+│   ├── /src       # React source files
+│   │   ├── /components  # Reusable components
+│   │   ├── /pages       # Page components corresponding to routes
+│   │   ├── /styles      # CSS/SASS files
+│   │   ├── /utils       # Utility functions
+│   │   ├── /hooks       # Custom React hooks
+│   │   ├── App.js       # Main React component
+│   │   ├── index.js     # React entry point
+│   │   └── ...          # Other necessary files
+│   └── package.json     # Frontend dependencies
+│
+├── /config         # Configuration files for both backend and frontend
+├── /public         # Static assets like images, fonts, etc.
+├── .env            # Environment variables
+├── .gitignore      # Git ignore file
+├── package.json    # Backend dependencies
+└── README.md       # Project documentation
