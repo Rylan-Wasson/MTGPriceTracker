@@ -6,7 +6,7 @@ const axios = require('axios').default
 const mongoose = require('mongoose')
 const fs = require('fs')
 const {Card, Price } = require('./models/CardModels')
-
+const {readData} = require('./services/DataService')
 
 
 // connect to db
@@ -18,7 +18,7 @@ mongoose.connect(process.env.DATABASE_URL)
 // fetchBulkCardData()
 const cards = readData('./bulkdata/output.json')
 
-uploadPrices(cards)
+// uploadPrices(cards)
 app.get('/', (req, res) => {
     res.send('Hello there')
 })
