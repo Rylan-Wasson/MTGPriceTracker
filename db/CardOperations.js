@@ -127,7 +127,14 @@ delete pricing info from db older than or equal to given date
 date: date object 
 */
 async function deletePrices(date){
-    await Price.deleteMany({date: {$lte: date}})
+    console.log("Deleting stale prices...")
+    try {
+        await Price.deleteMany({date: {$lte: date}})
+        console.log("Stale prices deleted succesfully.")
+    } catch (error) {
+        console.error('Error deleting stale prices: ', error)
+    }
+    
 }
 
 module.exports = {
