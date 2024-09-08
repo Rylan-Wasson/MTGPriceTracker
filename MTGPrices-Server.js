@@ -6,8 +6,11 @@ const axios = require('axios').default
 const mongoose = require('mongoose')
 const fs = require('fs')
 const {Card, Price } = require('./models/CardModels')
-const {readData} = require('./services/DataService')
 
+const{updateAllCards, uploadNewCards,uploadAllCards, uploadPrices, deletePrices} = require('./db/CardOperations')
+const{fetchBulkCardData} = require('./services/DataService')
+const {readData} = require('./services/DataService')
+const {initCronJobs} = require('./services/Scheduler')
 
 // connect to db
 mongoose.connect(process.env.DATABASE_URL)
@@ -15,10 +18,14 @@ mongoose.connect(process.env.DATABASE_URL)
     .catch(err => console.log('Mongo DB connection error: ', err))
 
 
-// fetchBulkCardData()
-const cards = readData('./bulkdata/output.json')
-
+//fetchBulkCardData()
+// const cards = readData('./bulkdata/output.json')
+//uploadAllCards(cards)
 // uploadPrices(cards)
+//deletePrices(1)
+
+initCronJobs()
+
 app.get('/', (req, res) => {
     res.send('Hello there')
 })

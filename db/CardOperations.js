@@ -31,6 +31,33 @@ async function updateAllCards(data) {
     console.log('Cards Updated.');
 }
 
+//  
+async function uploadAllCards(data) {
+    // upload new cards/update any changes
+    try {
+        console.log("Attempting to upload cards...")
+        // build operations to send to db
+        const bulkOps = data.map(card => ({
+            insertOne: {
+                document: {
+                    name: card.name,
+                    imgSmallUri: card.image_uris?.small ?? null,
+                    imgNormalUri: card.image_uris?.normal ?? null,
+                    imgLargeUri: card.image_uris?.large ?? null,
+                    imgPngUri: card.image_uris?.png ?? null
+                }
+            }
+        }))
+        // Perform the bulk operation
+        const result = await Card.bulkWrite(bulkOps, { ordered: true });
+    } catch (error) {
+        console.error('Error Updating All Cards: ', error);
+        throw error;
+    }
+    console.log('Cards Updated.');
+}
+
+
 /* 
 Add new cards to database
 data: json object containing all cards
@@ -82,7 +109,7 @@ async function uploadPrices(data){
             insertOne: {
                 document : {
                     oracleID: card.oracle_id,
-                    priceUSD: card.prices.used,
+                    priceUSD: card.prices.usd,
                     date: Date.now()
                 }
             }
@@ -95,9 +122,18 @@ async function uploadPrices(data){
         throw error
     }
 }
+/*
+delete pricing info from db older than or equal to given date
+date: date object 
+*/
+async function deletePrices(date){
+    await Price.deleteMany({date: {$lte: date}})
+}
 
 module.exports = {
     updateAllCards, 
+    uploadAllCards,
     uploadNewCards,
-    uploadPrices
+    uploadPrices,
+    deletePrices
 }

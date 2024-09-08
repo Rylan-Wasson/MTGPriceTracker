@@ -32,6 +32,7 @@ const fetchBulkCardData = async () => {
     }   
 }
 
+
 function readData(filePath) {
     try {
         const data = fs.readFileSync(filePath)
