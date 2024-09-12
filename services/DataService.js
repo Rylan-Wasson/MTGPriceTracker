@@ -25,8 +25,20 @@ const fetchBulkCardData = async () => {
             }
         })
         const writeStream = fs.createWriteStream('./bulkdata/output.json'); // TODO magic filepath
-        downloadResponse.data.pipe(writeStream)
-        console.log('Bulk data fetched succesfully.')
+        const finishWriting = () => {
+            return new Promise((resolve, reject) => {
+                writeStream.on('finish', resolve);
+                writeStream.on('error', reject);
+            });
+        };
+
+        // Pipe the response data to the write stream
+        downloadResponse.data.pipe(writeStream);
+
+        // Wait for the write stream to finish
+        await finishWriting();
+
+        console.log('Bulk data fetched successfully.');
 
     } catch (err) {
         console.error('Request error:', err);
