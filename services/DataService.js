@@ -2,6 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 
 const fetchBulkCardData = async () => {
+    console.log("Fetching bulk data...")
     try {
         const apiUrl = 'https://api.scryfall.com/bulk-data/oracle-cards'
 
@@ -25,7 +26,7 @@ const fetchBulkCardData = async () => {
         })
         const writeStream = fs.createWriteStream('./bulkdata/output.json'); // TODO magic filepath
         downloadResponse.data.pipe(writeStream)
-
+        console.log('Bulk data fetched succesfully.')
 
     } catch (err) {
         console.error('Request error:', err);

@@ -23,6 +23,7 @@ mongoose.connect(process.env.DATABASE_URL)
 //uploadAllCards(cards)
 // uploadPrices(cards)
 //deletePrices(1)
+fetchBulkCardData().then(()=>readData('./bulkdata/output.json'))
 
 initCronJobs()
 
