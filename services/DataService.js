@@ -48,7 +48,7 @@ const fetchBulkCardData = async () => {
 
 function readData(filePath) {
     try {
-        const data = fs.readFileSync('./bulkdata/output.json')
+        const data = fs.readFileSync(filePath)
         return JSON.parse(data)
     } catch (error) {
         console.error('Error reading file', error)

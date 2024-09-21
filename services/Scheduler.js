@@ -6,7 +6,7 @@ const {
     uploadPrices,
     deletePrices
 } = require('../db/CardOperations')
-const filePath = '../bulkdata/output.json'
+const filePath = './bulkdata/output.json'
 
 /*
  # ┌────────────── second (optional)
