@@ -137,10 +137,20 @@ async function deletePrices(date){
     
 }
 
+async function fetchCardByName(name) {
+    try {
+        result = await Card.findOne({name: name})
+        return result
+    } catch (error) {
+        
+    }
+}
+
 module.exports = {
     updateAllCards, 
     uploadAllCards,
     uploadNewCards,
     uploadPrices,
-    deletePrices
+    deletePrices,
+    fetchCardByName
 }

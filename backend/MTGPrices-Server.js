@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const fs = require('fs')
 const {Card, Price } = require('./models/CardModels')
 
-const{updateAllCards, uploadNewCards,uploadAllCards, uploadPrices, deletePrices} = require('./db/CardOperations')
+const{updateAllCards, uploadNewCards,uploadAllCards, uploadPrices, deletePrices, fetch, fetchCardByName} = require('./db/CardOperations')
 const{fetchBulkCardData} = require('./services/DataService')
 const {readData} = require('./services/DataService')
 const {initCronJobs} = require('./services/Scheduler')
@@ -28,6 +28,12 @@ initCronJobs()
 
 app.get('/', (req, res) => {
     res.send('Hello there')
+})
+
+app.get('/api/cards/:name', async (req, res) => {
+    const nameParam = req.params.name
+    const card = await fetchCardByName(nameParam)
+    res.send(card)
 })
 
 app.listen(port, () => {
