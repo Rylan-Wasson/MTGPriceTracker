@@ -19,12 +19,11 @@ mongoose.connect(process.env.DATABASE_URL)
 
 
 //fetchBulkCardData()
-// const cards = readData('./bulkdata/output.json')
+const cards = readData('./bulkdata/output.json')
 //uploadAllCards(cards)
-// uploadPrices(cards)
+uploadPrices(cards)
 //deletePrices(1)
-fetchBulkCardData().then(()=>readData('./bulkdata/output.json'))
-
+fetchBulkCardData()
 initCronJobs()
 
 app.get('/', (req, res) => {
