@@ -69,6 +69,15 @@ async function initCronJobs() {
             console.error('Error in monthly cron job:', err)
         }
     })
+
+    cron.schedule('0 * * * * *', async () => {
+        try {
+            const data = readData(filePath)
+            await uploadPrices(data)
+        } catch (error) {
+            
+        }
+    })
 }
 
 module.exports = {
